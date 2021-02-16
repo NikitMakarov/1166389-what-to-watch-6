@@ -1,6 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Player = () => {
+const Player = (props) => {
+  // eslint-disable-next-line no-unused-vars
+  const {films} = props;
+
   return <React.Fragment>
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
@@ -35,6 +39,10 @@ const Player = () => {
       </div>
     </div>
   </React.Fragment>;
+};
+
+Player.propTypes = {
+  films: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
 };
 
 export default Player;

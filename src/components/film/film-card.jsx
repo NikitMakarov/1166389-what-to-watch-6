@@ -1,6 +1,10 @@
 import React from "react";
+import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
 
-const FilmFullInfo = () => {
+const FilmFullInfo = ({films, match, history}) => {
+  const film = films.find((item) => item.id === Number(match.params.id));
+
   return <React.Fragment>
     <section className="movie-card movie-card--full">
       <div className="movie-card__hero">
@@ -28,14 +32,14 @@ const FilmFullInfo = () => {
 
         <div className="movie-card__wrap">
           <div className="movie-card__desc">
-            <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
+            <h2 className="movie-card__title">{film.name}</h2>
             <p className="movie-card__meta">
-              <span className="movie-card__genre">Drama</span>
-              <span className="movie-card__year">2014</span>
+              <span className="movie-card__genre">{film.genre}</span>
+              <span className="movie-card__year">{film.year}</span>
             </p>
 
             <div className="movie-card__buttons">
-              <button className="btn btn--play movie-card__button" type="button">
+            <button className="btn btn--play movie-card__button" type="button" onClick={() => history.push(`/player/${film.id}`)}>
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
@@ -47,7 +51,7 @@ const FilmFullInfo = () => {
                 </svg>
                 <span>My list</span>
               </button>
-              <a href="add-review.html" className="btn movie-card__button">Add review</a>
+              <Link to={`/films/${film.id}/review`} className="btn movie-card__button">Add review</Link>
             </div>
           </div>
         </div>
@@ -96,6 +100,12 @@ const FilmFullInfo = () => {
       </div>
     </section>
   </React.Fragment>;
+};
+
+FilmFullInfo.propTypes = {
+  films: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  match: PropTypes.object.isRequired,
+  history: PropTypes.object
 };
 
 export default FilmFullInfo;
