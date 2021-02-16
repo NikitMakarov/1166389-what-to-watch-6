@@ -8,29 +8,35 @@ import Player from "../player/player";
 import SignIn from "../signin/login";
 import PageError from "../error/error-404";
 
-const App = () => {
+const App = (props) => {
+  const {films} = props;
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <MainPage
-            films={[`1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `13`, `14`, `15`, `16`, `17`, `18`, `19`, `20`]}
-            title={`The Grand Budapest Hotel`}
-            genre={`Comedy`}
-            date={2012}
+            films = {films}
           />
         </Route>
-        <Route exact path="/films/:id">
-          <FilmFullInfo />
-        </Route>
+        <Route exact path="/films/:id" exact
+          render={(filmProps) => (
+            <FilmFullInfo films={films} {...filmProps}/>
+          )}
+        />
         <Route exact path="/mylist">
-          <MyList />
+          <MyList
+          films = {films}
+          />
         </Route>
-        <Route exact path="/films/:id/review">
-          <AddReview />
-        </Route>
+        <Route path="/films/:id/review" exact
+          render={(reviewProps) => (
+            <AddReview films={films} {...reviewProps}/>
+          )}
+        />
         <Route exact path="/player/:id">
-          <Player />
+          <Player
+          films = {films}
+          />
         </Route>
         <Route exact path="/login">
           <SignIn />

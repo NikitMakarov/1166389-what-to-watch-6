@@ -1,21 +1,24 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-const FilmCard = ({film}) => {
+const FilmCard = (props) => {
+  const {film} = props;
+
   return <React.Fragment>
     <article className="small-movie-card catalog__movies-card">
       <div className="small-movie-card__image">
-        <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" height="175" />
+        <img src={film.previewImage} alt={film.name} height="175"/>
       </div>
       <h3 className="small-movie-card__title">
-        <a className="small-movie-card__link" href="movie-page.html">{film}</a>
+        <Link to={`/films/${film.id}`} className="small-movie-card__link">{film.name}</Link>
       </h3>
     </article>
   </React.Fragment>;
 };
 
 FilmCard.propTypes = {
-  film: PropTypes.string.isRequired,
+  film: PropTypes.object.isRequired,
 };
 
 export default FilmCard;
