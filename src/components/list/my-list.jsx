@@ -7,7 +7,6 @@ const MyList = (props) => {
 
   return (
   <React.Fragment>
-    <section className="catalog">
       <div className="user-page">
         <header className="page-header user-page__head">
           <div className="logo">
@@ -46,7 +45,6 @@ const MyList = (props) => {
           </div>
         </footer>
       </div>
-    </section>
   </React.Fragment>
   );
 };
